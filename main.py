@@ -10,7 +10,26 @@ def button_press(num):
 
 
 def equals():
-    pass
+    global equation_text
+
+    try:
+        total = str(eval(equation_text))
+
+        equation_label.set(total)
+
+        equation_text = total
+    
+    except SyntaxError:
+        equation_label.set("syntax error")
+
+        equation_text = ""
+
+    except ZeroDivisionError:
+        equation_label.set("arithmetic error")
+
+        equation_text = ""
+
+
 
 def clear():
     pass
@@ -94,7 +113,7 @@ divide.grid(row=3, column=3)
 
 
 equal = Button(frame, text='=', height=4, width=9, font=25,
-                command=lambda:button_press('='))
+                command=equals)
 equal.grid(row=3, column=2)
 
 decimal = Button(frame, text='.', height=4, width=9, font=25,
@@ -103,7 +122,7 @@ decimal.grid(row=3, column=0)
 
 
 clear = Button(window, text='clear', height=4, width=15, font=25,
-                command=lambda:button_press('clear'))
+                command=clear)
 clear.pack()
 
 
